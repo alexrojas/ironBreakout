@@ -14,16 +14,18 @@ var brickColumnCount = 5;
 var brickWidth = 80;
 var brickHeight = 20;
 var brickPadding = 10;
-var brickOffsetTop = 30;
+var brickOffsetTop = 40;
 var brickOffsetLeft = 35;
 
 var bricks = [];
 for(var c=0; c<brickColumnCount; c++) {
     bricks[c] = [];
     for(var r=0; r<brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0 };
+        bricks[c][r] = { x: 0, y: 0, status: 1 };
     }
 }
+
+var score = 0
 
 function draw (){
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
@@ -34,6 +36,9 @@ function draw (){
 
   drawPaddle()
 
+  collisionDetection()
+
+  drawScore()
   if(x + dx > canvas2.width-ballRadius || x + dx < ballRadius){
     dx = -dx;
   }
@@ -64,9 +69,4 @@ function draw (){
   y += dy
 }
 
-
-
-
-
-// draw
-setInterval(draw, 10)
+setInterval(draw, 2)

@@ -9,15 +9,51 @@ var ballRadius = 10;
 function drawBricks() {
     for(var c=0; c<brickColumnCount; c++) {
         for(var r=0; r<brickRowCount; r++) {
+          if(bricks[c][r].status == 1) {
             var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
             var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
             bricks[c][r].x = brickX;
             bricks[c][r].y = brickY;
             canvas.beginPath();
-            canvas.rect(brickX, brickY, brickWidth, brickHeight);
-            canvas.fillStyle = "#00dd67";
+            canvas.rect(brickX, brickY, brickWidth, brickHeight)
+            console.log(brickX+ brickY);
+            canvas.fillStyle = "#00dd67"
+            // canvas.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
             canvas.fill();
             canvas.closePath();
+          }
+        }
+    }
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+var color = "#00dd67"
+// #00dd67"
+function collisionDetection() {
+    for(var c=0; c<brickColumnCount; c++) {
+        for(var r=0; r<brickRowCount; r++) {
+            var brick = bricks[c][r];
+            if(brick.status ===1){
+              if(x > brick.x && x < brick.x+brickWidth && y > brick.y && y < brick.y+brickHeight) {
+                color = getRandomColor();
+                dy = -dy;
+                brick.status = 0
+                score++
+                if(score == brickRowCount*brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                }
+              }
+
+            }
         }
     }
 }
@@ -27,7 +63,7 @@ function drawBall(){
 
   canvas.beginPath();
   canvas.arc(x, y, ballRadius, 0, Math.PI*2);
-  canvas.fillStyle = "#009edd";
+  canvas.fillStyle = getRandomColor();
   canvas.fill();
   canvas.closePath();
 }
@@ -62,6 +98,12 @@ function keyUpHandler(e) {
     else if(e.keyCode == 37) {
         leftPressed = false;
     }
+}
+
+function drawScore() {
+    canvas.font = "16px Arial";
+    canvas.fillStyle = "#0095DD";
+    canvas.fillText("Score: "+score, 8, 20);
 }
 
 
