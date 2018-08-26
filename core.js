@@ -29,7 +29,7 @@ var score = 0
 
 function draw (){
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
-
+canvas2.style.background = "black";
   drawBricks()
 
   drawBall()
