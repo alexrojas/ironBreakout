@@ -16,7 +16,7 @@ function drawBricks() {
             bricks[c][r].y = brickY;
             canvas.beginPath();
             canvas.rect(brickX, brickY, brickWidth, brickHeight)
-            console.log(brickX+ brickY);
+            // console.log(brickX+ brickY);
             canvas.fillStyle = "#00dd67"
             // canvas.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
             canvas.fill();
@@ -47,7 +47,7 @@ function collisionDetection() {
                 dy = -dy;
                 brick.status = 0
                 score++
-                if(score == brickRowCount*brickColumnCount) {
+                if(score === brickRowCount*brickColumnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
                         document.location.reload();
                 }
