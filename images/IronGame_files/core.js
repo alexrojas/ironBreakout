@@ -9,7 +9,7 @@ var paddleHeight = 15;
 var paddleWidth = 135;
 var paddleX = (canvas2.width-paddleWidth)/2;
 
-var bulletX = (paddleX + paddleWidth/2)
+var bulletX = (paddleX + paddleWidth)
 
 
 var brickRowCount = 5;
@@ -71,10 +71,8 @@ canvas2.style.background = "black";
 
   if(rightPressed && paddleX < canvas2.width-paddleWidth) {
     paddleX += 7;
-    bulletX += 7
   }else if(leftPressed && paddleX > 0) {
       paddleX -= 7;
-      bulletX -= 7
   }
   x += dx
   y += dy
