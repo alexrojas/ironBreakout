@@ -1,7 +1,9 @@
 var x = canvas2.width/2;
 var y = canvas2.height-30;
+var yb = canvas2.height-20;
 var dx = 2;
 var dy = -2;
+
 console.log(x);
 console.log(y);
 
@@ -9,7 +11,7 @@ var paddleHeight = 15;
 var paddleWidth = 135;
 var paddleX = (canvas2.width-paddleWidth)/2;
 
-var bulletX = (paddleX + paddleWidth/2)
+var bulletX = paddleX + paddleWidth / 2
 
 
 var brickRowCount = 5;
@@ -33,8 +35,10 @@ for(var c=0; c<brickColumnCount; c++) {
 var score = 0
 
 function draw (){
+  // console.log(bulletX)
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
-canvas2.style.background = "black";
+  canvas2.style.background = "black";
+
   drawBricks()
 
   drawBall()
@@ -63,7 +67,7 @@ canvas2.style.background = "black";
       dy = -dy
       dx = 5
     }else{
-      alert("GAME OVER");
+      // alert("GAME OVER");
       document.location.reload();
     }
   }
@@ -71,13 +75,33 @@ canvas2.style.background = "black";
 
   if(rightPressed && paddleX < canvas2.width-paddleWidth) {
     paddleX += 7;
-    bulletX += 7
+
   }else if(leftPressed && paddleX > 0) {
       paddleX -= 7;
-      bulletX -= 7
+
+  }
+  if(spacePressed === true){
+    yb -= 3
+  }
+  if(yb <= 0) {
+    spacePressed = false;
+    yb = canvas2.height-20
+    bulletX = paddleX + paddleWidth / 2
   }
   x += dx
   y += dy
+  // yb -= 3
 }
 
 setInterval(draw, 6)
+// setInterval(drawBullet, 15)
+
+bulletX = (paddleX + paddleWidth/2)
+document.onkeydown = function(e) {
+    if (e.keyCode === 32) {
+      console.log('spaceBar')
+    //   bulletX ++
+    //
+    drawBullet()
+    }
+  };

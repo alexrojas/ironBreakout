@@ -17,7 +17,7 @@ function drawBricks() {
             bricks[c][r].y = brickY;
             canvas.beginPath();
             canvas.rect(brickX, brickY, brickWidth, brickHeight)
-            console.log(brickX+ brickY);
+            // console.log(brickX+ brickY);
             canvas.fillStyle = color
             // canvas.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
             canvas.fill();
@@ -69,21 +69,12 @@ function drawBall(){
   canvas.closePath();
 }
 function drawBullet(){
-
   canvas.beginPath();
-  canvas.arc(bulletX, y, ballRadius, 0, Math.PI*2);
+  canvas.arc(bulletX, yb, bulletRadius, 0, Math.PI*2);
   canvas.fillStyle = "red";
   canvas.fill();
   canvas.closePath();
 }
-// function drawBullet(){
-//
-//   canvas.beginPath();
-//   canvas.arc(bulletX, canvas2.height-paddleHeight, bulletRadius, 0, Math.PI*2);
-//   canvas.fillStyle = "red";
-//   canvas.fill();
-//   canvas.closePath();
-// }
 
 function drawPaddle() {
     canvas.beginPath();
@@ -95,9 +86,22 @@ function drawPaddle() {
 
 var rightPressed = false;
 var leftPressed = false;
+var spacePressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+// document.
+
+// document.onkeydown = function(e) {
+//   if (e.keyCode === 32) {
+//     spacePressed = true
+//   //   drawBullet()
+//   //   console.log('working')
+//   //
+// }else{
+//   spacePressed = false
+// }
+// };
 
 function keyDownHandler(e) {
     if(e.keyCode === 39) {
@@ -105,6 +109,8 @@ function keyDownHandler(e) {
     }
     else if(e.keyCode == 37) {
         leftPressed = true;
+    }else if(e.keyCode === 32){
+        spacePressed = true;
     }
 }
 
@@ -116,6 +122,7 @@ function keyUpHandler(e) {
         leftPressed = false;
     }
 }
+
 
 function drawScore() {
     canvas.font = "16px Arial";
