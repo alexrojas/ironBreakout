@@ -1,6 +1,6 @@
 var x = canvas2.width/2;
 var y = canvas2.height-30;
-var yb = canvas2.height-20;
+var yb = canvas2.height;
 var dx = 2;
 var dy = -2;
 
@@ -59,13 +59,13 @@ function draw (){
   }else if(y + dy > canvas2.height - paddleHeight){
     if(x > (paddleX + 35)&& x < (paddleX + paddleWidth) -35){
       dy = -dy
-      if(dx === 6){
-        dx = 2
-      }
+      // if(dx === 6){
+      //   dx = 2
+      // }
       // dx = 2
     }else if(x > paddleX && x < paddleX + paddleWidth){
       dy = -dy
-      dx = 5
+      dx = 6
     }else{
       // alert("GAME OVER");
       document.location.reload();
@@ -73,19 +73,24 @@ function draw (){
   }
 
 
-  if(rightPressed && paddleX < canvas2.width-paddleWidth) {
-    paddleX += 7;
 
+  if(rightPressed && paddleX < canvas2.width-paddleWidth ) {
+    paddleX += 7;
+    if( spacePressed === false){
+      bulletX += 7
+    }
   }else if(leftPressed && paddleX > 0) {
       paddleX -= 7;
-
+      if(spacePressed === false){
+        bulletX -= 7
+      }
   }
   if(spacePressed === true){
-    yb -= 3
-  }
+      yb -= 8
+   }
   if(yb <= 0) {
     spacePressed = false;
-    yb = canvas2.height-20
+    yb = canvas2.height-1
     bulletX = paddleX + paddleWidth / 2
   }
   x += dx
@@ -94,14 +99,3 @@ function draw (){
 }
 
 setInterval(draw, 6)
-// setInterval(drawBullet, 15)
-
-bulletX = (paddleX + paddleWidth/2)
-document.onkeydown = function(e) {
-    if (e.keyCode === 32) {
-      console.log('spaceBar')
-    //   bulletX ++
-    //
-    drawBullet()
-    }
-  };

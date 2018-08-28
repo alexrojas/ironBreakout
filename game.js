@@ -42,19 +42,30 @@ function collisionDetection() {
     for(var c=0; c<brickColumnCount; c++) {
         for(var r=0; r<brickRowCount; r++) {
             var brick = bricks[c][r];
+
             if(brick.status ===1){
-              if(x > brick.x && x < brick.x+brickWidth && y > brick.y && y < brick.y+brickHeight) {
-                color = getRandomColor();
-                dy = -dy;
-                brick.status = 0
-                score++
-                if(score === brickRowCount*brickColumnCount) {
-                        alert("YOU WIN, CONGRATULATIONS!");
-                        document.location.reload();
+
+                if(x > brick.x && x < brick.x+brickWidth && y > brick.y && y < brick.y+brickHeight) {
+                  dy = -dy;
+                  yb = -10
+                  brick.status = 0
+                  score++
                 }
+                if(bulletX > brick.x && bulletX< brick.x+brickWidth && yb > brick.y && yb < brick.y+brickHeight) {
+                  color = getRandomColor();
+                  yb = -10
+                  brick.status = 0
+                  score++
+                }
+
+                  if(score === brickRowCount*brickColumnCount) {
+                          alert("YOU WIN, CONGRATULATIONS!");
+                          document.location.reload();
+                      }
+                  // }
               }
 
-            }
+
         }
     }
 }
@@ -90,18 +101,7 @@ var spacePressed = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-// document.
 
-// document.onkeydown = function(e) {
-//   if (e.keyCode === 32) {
-//     spacePressed = true
-//   //   drawBullet()
-//   //   console.log('working')
-//   //
-// }else{
-//   spacePressed = false
-// }
-// };
 
 function keyDownHandler(e) {
     if(e.keyCode === 39) {
@@ -116,10 +116,12 @@ function keyDownHandler(e) {
 
 function keyUpHandler(e) {
     if(e.keyCode === 39) {
-        rightPressed = false;
+        rightPressed = false ;
+        // spacePressed = false
     }
     else if(e.keyCode == 37) {
         leftPressed = false;
+        // spacePressed = false
     }
 }
 
@@ -129,28 +131,3 @@ function drawScore() {
     canvas.fillStyle = "#0095DD";
     canvas.fillText("Score: "+score, 8, 20);
 }
-
-
-// var canvas = document.getElementById("canvas");
-// // var canvas = canvas.getContext("2d");
-// canvas.beginPath()
-// canvas.rect(20, 40, 50, 50)
-// canvas.fillStyle = 'blue'
-// canvas.fill()
-// canvas.stroke()
-// canvas.closePath
-// //
-// //
-// //
-// canvas.beginPath();
-// canvas.arc(240, 160, 20, 0, Math.PI*2 , false);
-// canvas.fillStyle = "green";
-// canvas.fill();
-// canvas.closePath();
-//
-// //
-// canvas.beginPath();
-// canvas.rect(160, 10, 100, 40);
-// canvas.strokeStyle = "rgba(0, 0, 255, 0.5)";
-// canvas.stroke();
-// canvas.closePath();
