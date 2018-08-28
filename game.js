@@ -27,6 +27,29 @@ function drawBricks() {
     }
 }
 
+function drawOuterBricks() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < outerRowCount; r++) {
+      if (outerBricks[c][r].status == 1) {
+        var outerBrickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+        var outerBrickY =
+          r * (brickHeight + brickPadding) +
+          brickRowCount * (brickPadding + brickHeight) +
+          brickOffsetTop;
+        outerBricks[c][r].x = outerBrickX;
+        outerBricks[c][r].y = outerBrickY;
+        canvas.beginPath();
+        canvas.rect(outerBrickX, outerBrickY, brickWidth, brickHeight);
+        // console.log(brickX+ outerBrickY);
+        canvas.fillStyle = "blue";
+        // canvas.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+        canvas.fill();
+        canvas.closePath();
+      }
+    }
+  }
+}
+
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -47,29 +70,55 @@ function collisionDetection() {
 
                 if(x > brick.x && x < brick.x+brickWidth && y > brick.y && y < brick.y+brickHeight) {
                   dy = -dy;
-                  yb = -10
+                  // yb = -10
                   brick.status = 0
                   score++
                 }
                 if(bulletX > brick.x && bulletX< brick.x+brickWidth && yb > brick.y && yb < brick.y+brickHeight) {
                   color = getRandomColor();
-                  yb = -10
+                  yb = -20
                   brick.status = 0
                   score++
                 }
-
-                  if(score === brickRowCount*brickColumnCount) {
+                  if(score === 48) {
                           alert("YOU WIN, CONGRATULATIONS!");
                           document.location.reload();
                       }
-                  // }
               }
-
-
         }
     }
 }
 
+var counter = 0
+
+function outerCollisionDetection() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < outerRowCount; r++) {
+            var outerBrick = outerBricks[c][r];
+            if (outerBrick.status === 1) {
+                if (
+                    x > outerBrick.x &&
+                    x < outerBrick.x + brickWidth &&
+                    y > outerBrick.y &&
+                    y < outerBrick.y + brickHeight
+                ) {
+                    dy = -dy;
+                    counter++;
+                    if (counter % 2 === 0) {
+                        outerBrick.status = 0;
+                        // redrawBricks();
+
+                        score++;
+                            if (score === 48) {
+                                alert("YOU WIN, CONGRATULATIONS!");
+                                document.location.reload();
+                            }
+                        }
+                    }
+            }
+        }
+    }
+}
 
 function drawBall(){
 
@@ -117,11 +166,11 @@ function keyDownHandler(e) {
 function keyUpHandler(e) {
     if(e.keyCode === 39) {
         rightPressed = false ;
-        // spacePressed = false
+
     }
     else if(e.keyCode == 37) {
         leftPressed = false;
-        // spacePressed = false
+
     }
 }
 

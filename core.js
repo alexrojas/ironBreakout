@@ -1,11 +1,11 @@
 var x = canvas2.width/2;
 var y = canvas2.height-30;
 var yb = canvas2.height;
-var dx = 2;
+var dx = 1.2;
 var dy = -2;
 
-console.log(x);
-console.log(y);
+// console.log(x);
+// console.log(y);
 
 var paddleHeight = 15;
 var paddleWidth = 135;
@@ -22,7 +22,8 @@ var brickPadding = 10;
 var brickOffsetTop = 40;
 var brickOffsetLeft = 35;
 
-``
+var outerRowCount = 2
+
 
 var bricks = [];
 for(var c=0; c<brickColumnCount; c++) {
@@ -32,14 +33,24 @@ for(var c=0; c<brickColumnCount; c++) {
     }
 }
 
+var outerBricks = []
+for(var c=0; c<brickColumnCount; c++){
+  outerBricks[c] = []
+  for(var r=0; r<outerRowCount; r++){
+    outerBricks[c][r] = {x: 0, y: brickRowCount, status: 1}
+  }
+}
+
 var score = 0
 
 function draw (){
   // console.log(bulletX)
+
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
   canvas2.style.background = "black";
 
   drawBricks()
+  drawOuterBricks()
 
   drawBall()
 
@@ -48,13 +59,14 @@ function draw (){
   drawPaddle()
 
   collisionDetection()
+  outerCollisionDetection()
 
   drawScore()
   if(x + dx > canvas2.width-ballRadius || x + dx < ballRadius){
     dx = -dx;
   }
 
-  if(y + dy < ballRadius){
+  if(y + dy < paddleHeight){
     dy = -dy;
   }else if(y + dy > canvas2.height - paddleHeight){
     if(x > (paddleX + 35)&& x < (paddleX + paddleWidth) -35){
@@ -64,8 +76,8 @@ function draw (){
       // }
       // dx = 2
     }else if(x > paddleX && x < paddleX + paddleWidth){
-      dy = -dy
-      dx = 6
+      dy = -dy * 1.1
+      dx = dx * 1.2
     }else{
       // alert("GAME OVER");
       document.location.reload();
