@@ -173,21 +173,21 @@
 
 
   function keyDownHandler(e) {
-    if (e.keyCode === 39) {
+    if (e.keyCode === 39 || e.keyCode === 68) {
       rightPressed = true;
-    } else if (e.keyCode == 37) {
+    } else if (e.keyCode == 37 || e.keyCode === 65) {
       leftPressed = true;
-    } else if (e.keyCode === 32) {
+    } else if (e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 87) {
       spacePressed = true;
       myMusic1.play()
     }
   }
 
   function keyUpHandler(e) {
-    if (e.keyCode === 39) {
+    if (e.keyCode === 39 || e.keyCode === 68) {
       rightPressed = false;
 
-    } else if (e.keyCode == 37) {
+    } else if (e.keyCode == 37 || e.keyCode === 65) {
       leftPressed = false;
 
     }

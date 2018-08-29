@@ -65,7 +65,7 @@ function draw() {
   // console.log(bulletX)
 
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
-  canvas2.style.background = "#040404";
+  canvas2.style.background = "black";
 // myMusic1.play()
   drawBricks()
   drawOuterBricks()
@@ -103,7 +103,7 @@ function draw() {
       else{
         x = canvas2.width/2
         y = canvas2.height-30
-        dx = 2
+        dx = 1.2
         dy = -2
         paddleX = (canvas2.width-paddleWidth)/2;
         bulletX = paddleX + paddleWidth / 2
