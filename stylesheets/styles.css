@@ -1,5 +1,14 @@
+body{
+  background-color: black
+}
+
 canvas{
-  background: black
+  background: black;
+  /* margin-top: 50px */
+}
+
+#myCanvas{
+  /* margin-top: 50px */
 }
 
 .welcomePage{
@@ -10,13 +19,16 @@ canvas{
 .welcomePage{
   background-image: url("../images/atari-background-6.jpg");
   background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 
 .info{
-  /* background-color: red; */
+
+  /* background-color: red;
+  width: 35%; */
+
   /* display:inline-block; */
 }
 

@@ -65,7 +65,7 @@ function draw() {
   // console.log(bulletX)
 
   canvas.clearRect(0, 0, canvas2.width, canvas2.height)
-  canvas2.style.background = "black";
+  canvas2.style.background = "#040404";
 // myMusic1.play()
   drawBricks()
   drawOuterBricks()
@@ -97,7 +97,7 @@ function draw() {
     } else {
       lives--
       if(!lives){
-        alert("GAME OVER");
+        // alert("GAME OVER");
         document.location.reload();
       }
       else{
