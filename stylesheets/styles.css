@@ -19,3 +19,12 @@ canvas{
   /* background-color: red; */
   /* display:inline-block; */
 }
+
+.minimap .highlight-selected {
+  background: blue;
+}
+
+/* The rule for selected highlights */
+.minimap .highlight-selected.selected {
+  background: red;
+}
